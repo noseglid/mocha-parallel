@@ -21,7 +21,6 @@ function main() {
         return ['cd', cwd, '&&', fmt(format, task)].join(' ');
       });
 
-  console.log('parallelize');
   parallelize(tasks);
 }
 
