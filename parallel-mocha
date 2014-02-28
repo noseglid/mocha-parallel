@@ -15,13 +15,17 @@ function main() {
     .option('-t, --tasks [tasks]', 'list of tasks')
     .parse(process.argv);
 
-  var cwd = program.cwd || '.',
-      format = program.format || '%s'
+  var format = program.format || '%s'
       tasks = program.tasks.split(/\s+/).map(function(task) {
-        return ['cd', cwd, '&&', fmt(format, task)].join(' ');
+        return fmt(format, task);
       });
 
-  parallelize(tasks);
+  var opts = {};
+  if (program.cwd) {
+    opts.cwd = program.cwd;
+  }
+
+  parallelize(tasks, opts);
 }
 
 
