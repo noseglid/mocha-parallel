@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+var colors = require('colors'),
+    fmt = require('util').format,
+    parallelize = require('./lib/parallelizer').parallelize,
+    program = require('commander');
+
+
+function main() {
+  program
+    .description('Run a list of tasks in parallel')
+    .usage('--cwd /path/to/cwd --format "echo %s" --tasks "a b c 1 2 3"')
+    .version('0.0.1')
+    .option('-d, --cwd [cwd]', 'directory to execute tasks')
+    .option('-f, --format [format]', 'template for tasks')
+    .option('-t, --tasks [tasks]', 'list of tasks')
+    .parse(process.argv);
+
+  var cwd = program.cwd || '.',
+      format = program.format || '%s'
+      tasks = program.tasks.split(/\s+/).map(function(task) {
+        return ['cd', cwd, '&&', fmt(format, task)].join(' ');
+      });
+
+  console.log('parallelize');
+  parallelize(tasks);
+}
+
+
+if (require.main === module) {
+  main();
+}

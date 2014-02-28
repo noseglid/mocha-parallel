@@ -1,0 +1,14 @@
+{
+  "name": "parallel-mocha",
+  "version": "0.0.1",
+  "description": "Parallel test runner for mocha-ish things",
+  "main": "parallel-mocha",
+  "author": "Gareth Aye <gaye@mozilla.com>",
+  "license": "MPL v2",
+
+  "dependencies": {
+    "colors": "0.6.2",
+    "commander": "2.1.0",
+    "debug": "0.7.4"
+  }
+}
