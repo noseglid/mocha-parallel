@@ -9,10 +9,12 @@ function main() {
   program
     .description('Run a list of tasks in parallel')
     .usage('--cwd /path/to/cwd ' +
+           '--env "FOO=bar BAR=baz" ' +
            '--format "some mocha command %s" ' +
            '--tasks "one_test.js two_test.js three_test.js"')
     .version('0.0.1')
-    .option('-d, --cwd [cwd]', 'directory to execute tasks')
+    .option('-c, --cwd [cwd]', 'directory to execute tasks')
+    .option('-e, --env [env]', 'environment variables')
     .option('-f, --format [format]', 'template for tasks')
     .option('-t, --tasks [tasks]', 'list of tasks')
     .parse(process.argv);
@@ -25,6 +27,16 @@ function main() {
   var opts = {};
   if (program.cwd) {
     opts.cwd = program.cwd;
+  }
+  if (program.env) {
+    var envs = program.env.split(/\s+/);
+    var env = {};
+    envs.forEach(function(pair) {
+      pair = pair.split('=');
+      env[pair[0]] = pair[1];
+    });
+
+    opts.env = env;
   }
 
   parallelize(tasks, opts);
