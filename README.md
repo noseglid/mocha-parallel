@@ -1,4 +1,4 @@
-# parallel-mocha
+# mocha-parallel
 
 
 [![Build Status](https://travis-ci.org/gaye/mocha-parallel.png?branch=master)](https://travis-ci.org/gaye/mocha-parallel)
@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-  Usage: parallel-mocha \
+  Usage: ./mocha-parallel \
              --cwd /path/to/cwd \
              --env "FOO=bar BAR=baz" \
              --format "some mocha command %s" \
