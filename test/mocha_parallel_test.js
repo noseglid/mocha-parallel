@@ -3,11 +3,11 @@ var assert = require('assert'),
     path = require('path');
 
 
-suite('parallel-mocha', function() {
+suite('mocha-parallel', function() {
   var stdout, stderr, err;
 
   setup(function(done) {
-    var command = './parallel-mocha';
+    var command = './mocha-parallel';
     var args = [
       '--cwd',
       path.join(__dirname, 'fixtures'),
