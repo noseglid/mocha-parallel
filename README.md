@@ -1,7 +1,7 @@
 # parallel-mocha
 
 
-[![Build Status](https://travis-ci.org/gaye/parallel-mocha.png?branch=master)](https://travis-ci.org/gaye/parallel-mocha)
+[![Build Status](https://travis-ci.org/gaye/mocha-parallel.png?branch=master)](https://travis-ci.org/gaye/mocha-parallel)
 
 ### Usage
 
