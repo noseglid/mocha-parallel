@@ -12,7 +12,7 @@ function main() {
            '--env "FOO=bar BAR=baz" ' +
            '--format "some mocha command %s" ' +
            '--tasks "one_test.js two_test.js three_test.js"')
-    .version('0.0.1')
+    .version('0.0.2')
     .option('-c, --cwd [cwd]', 'directory to execute tasks')
     .option('-e, --env [env]', 'environment variables')
     .option('-f, --format [format]', 'template for tasks')
