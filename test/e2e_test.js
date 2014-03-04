@@ -1,9 +1,11 @@
 var assert = require('assert'),
     exec = require('child_process').exec,
+    fmt = require('util').format,
+    os = require('os'),
     path = require('path');
 
 
-suite('mocha-parallel', function() {
+suite('e2e', function() {
   var stdout, stderr, err;
 
   setup(function(done) {
@@ -41,5 +43,14 @@ suite('mocha-parallel', function() {
   test('should have failing test in epilogue', function() {
     assert.ok(stderr.indexOf('1) fail_test fail:') !== -1);
     assert.ok(stderr.indexOf('AssertionError: false == true' !== -1));
+  });
+
+  test('should have no errors', function() {
+    assert.ok(!err);
+  });
+
+  test('should default to number of cpus', function() {
+    var expected = fmt('%d parallel', os.cpus().length);
+    assert.ok(stdout.indexOf(expected) !== -1);
   });
 });
