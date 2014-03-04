@@ -1,6 +1,6 @@
 {
   "name": "mocha-parallel",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Parallel test runner for mocha-ish things",
   "author": "Gareth Aye <gaye@mozilla.com>",
   "license": "MPL v2",
@@ -16,7 +16,8 @@
   },
 
   "devDependencies": {
-    "mocha": "1.17.1"
+    "mocha": "1.17.1",
+    "sinon": "1.8.2"
   },
 
   "scripts": {

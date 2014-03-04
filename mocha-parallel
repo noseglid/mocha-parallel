@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-var colors = require('colors'),
-    fmt = require('util').format,
+var fmt = require('util').format,
+    os = require('os'),
     parallelize = require('./lib/parallelizer').parallelize,
     program = require('commander');
 
@@ -12,22 +12,25 @@ function main() {
            '--env "FOO=bar BAR=baz" ' +
            '--format "some mocha command %s" ' +
            '--tasks "one_test.js two_test.js three_test.js"')
-    .version('0.0.2')
+    .version('0.1.0')
     .option('-c, --cwd [cwd]', 'directory to execute tasks')
     .option('-e, --env [env]', 'environment variables')
     .option('-f, --format [format]', 'template for tasks')
+    .option('-p, --parallel [parallel]', 'number of parallel tasks')
     .option('-t, --tasks [tasks]', 'list of tasks')
     .parse(process.argv);
 
-  var format = program.format || '%s'
+  var format = program.format || '%s',
       tasks = program.tasks.split(/\s+/).map(function(task) {
         return fmt(format, task);
       });
 
   var opts = {};
+
   if (program.cwd) {
     opts.cwd = program.cwd;
   }
+
   if (program.env) {
     var envs = program.env.split(/\s+/);
     var env = {};
@@ -38,6 +41,18 @@ function main() {
 
     opts.env = env;
   }
+
+  if (program.parallel && /\d+/.test(program.parallel)) {
+    opts.parallel = parseInt(program.parallel, 10);
+  } else {
+    opts.parallel = os.cpus().length;  /* default to number of cpus */
+  }
+
+  console.log(
+    '\n  Running %d tests with %d parallel jobs',
+    tasks.length,
+    opts.parallel
+  );
 
   parallelize(tasks, opts);
 }
