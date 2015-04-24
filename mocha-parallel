@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-var fmt = require('util').format,
-    os = require('os'),
-    parallelize = require('./lib/parallelizer').parallelize,
-    program = require('commander');
+'use strict';
 
+var fmt = require('util').format;
+var os = require('os');
+var parallelize = require('./lib/parallelizer').parallelize;
+var program = require('commander');
 
 function main() {
   program
@@ -20,10 +21,10 @@ function main() {
     .option('-t, --tasks [tasks]', 'list of tasks')
     .parse(process.argv);
 
-  var format = program.format || '%s',
-      tasks = program.tasks.split(/\s+/).map(function(task) {
-        return fmt(format, task);
-      });
+  var format = program.format || '%s';
+  var tasks = program.tasks.split(/\s+/).map(function (task) {
+    return fmt(format, task);
+  });
 
   var opts = {};
 
@@ -34,7 +35,7 @@ function main() {
   if (program.env) {
     var envs = program.env.split(/\s+/);
     var env = {};
-    envs.forEach(function(pair) {
+    envs.forEach(function (pair) {
       pair = pair.split('=');
       env[pair[0]] = pair[1];
     });
@@ -48,15 +49,10 @@ function main() {
     opts.parallel = os.cpus().length;  /* default to number of cpus */
   }
 
-  console.log(
-    '\n  Running %d tests with %d parallel jobs',
-    tasks.length,
-    opts.parallel
-  );
+  console.log('\n  Running %d tests with %d parallel jobs\n', tasks.length, opts.parallel);
 
   parallelize(tasks, opts);
 }
-
 
 if (require.main === module) {
   main();
