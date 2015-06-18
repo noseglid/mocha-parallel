@@ -5,7 +5,7 @@
   "author": "Alexander Olsson <noseglid@gmail.com>",
   "license": "MIT",
   "bin": {
-    "mocha-parallel": "./mocha-parallel"
+    "mopar": "./mopar"
   },
   "dependencies": {
     "colors": "0.6.2",

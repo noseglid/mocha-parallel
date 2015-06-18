@@ -1,12 +1,11 @@
-# mocha-parallel
+# mopar
 
-
-[![Build Status](https://travis-ci.org/gaye/mocha-parallel.png?branch=master)](https://travis-ci.org/gaye/mocha-parallel)
+A parallel runner for mocha
 
 ### Usage
 
 ```
-  Usage: ./mocha-parallel \
+  Usage: ./mopar \
              --cwd /path/to/cwd \
              --env "FOO=bar BAR=baz" \
              --format "some mocha command %s" \
