@@ -1,14 +1,12 @@
 {
   "name": "mopar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Parallel test runner for mocha-ish things, forked from mocha-parallel, by Gareth Aye",
   "author": "Alexander Olsson <noseglid@gmail.com>",
   "license": "MIT",
-
   "bin": {
     "mocha-parallel": "./mocha-parallel"
   },
-
   "dependencies": {
     "colors": "0.6.2",
     "commander": "2.1.0",
