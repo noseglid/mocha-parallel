@@ -24,7 +24,3 @@
     -t, --tasks [tasks]    list of tasks
 
 ```
-
-### gaia-integration example
-
-`GAIA=/home/gareth/Documents/gaia example/gaia-integration.sh`
