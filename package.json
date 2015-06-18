@@ -1,6 +1,6 @@
 {
   "name": "mopar",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Parallel test runner for mocha-ish things, forked from mocha-parallel, by Gareth Aye",
   "author": "Alexander Olsson <noseglid@gmail.com>",
   "license": "MIT",
