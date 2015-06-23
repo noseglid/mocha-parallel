@@ -1,6 +1,6 @@
 # mopar
 
-A parallel runner for mocha
+A parallel runner for mocha. See usage example on how to use it
 
 ### Usage
 
