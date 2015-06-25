@@ -23,3 +23,10 @@ A parallel runner for mocha. See usage example on how to use it
     -t, --tasks [tasks]    list of tasks
 
 ```
+
+### Debug
+
+  All debug messages are written with the [debug][debug] library.
+  To output all information run with environmentvariable `DEBUG=*`.
+
+  [debug]: https://www.npmjs.com/package/debug

@@ -1,5 +1,5 @@
 {
-  "passing": "green",
+  "passes": "green",
   "pending": "blue",
-  "failing": "red"
+  "failures": "red"
 }
