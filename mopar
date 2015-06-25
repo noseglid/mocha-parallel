@@ -5,6 +5,7 @@ var fmt = require('util').format;
 var os = require('os');
 var parallelize = require('./lib/parallelizer').parallelize;
 var program = require('commander');
+var reporters = require('./reporters');
 
 function main() {
   program
@@ -13,12 +14,13 @@ function main() {
            '--env "FOO=bar BAR=baz" ' +
            '--format "some mocha command %s" ' +
            '--tasks "one_test.js two_test.js three_test.js"')
-    .version('0.1.0')
+    .version(require('./package').version)
     .option('-c, --cwd [cwd]', 'directory to execute tasks')
     .option('-e, --env [env]', 'environment variables')
     .option('-f, --format [format]', 'template for tasks')
     .option('-p, --parallel [parallel]', 'number of parallel tasks')
     .option('-t, --tasks [tasks]', 'list of tasks')
+    .option('-r, --reporter [reporter]', 'reporter for output, `dot` or `xunit`')
     .parse(process.argv);
 
   var format = program.format || '%s';
@@ -26,11 +28,10 @@ function main() {
     return fmt(format, task);
   });
 
-  var opts = {};
-
-  if (program.cwd) {
-    opts.cwd = program.cwd;
-  }
+  var opts = {
+    cwd: program.cwd || process.cwd(),
+    reporter: reporters[program.reporter ? program.reporter : 'dot']
+  };
 
   if (program.env) {
     var envs = program.env.split(/\s+/);
@@ -49,8 +50,7 @@ function main() {
     opts.parallel = os.cpus().length;  /* default to number of cpus */
   }
 
-  console.log('\n  Running %d tests with %d parallel jobs\n', tasks.length, opts.parallel);
-
+  opts.reporter.init(tasks.length, opts.parallel);
   parallelize(tasks, opts);
 }
 

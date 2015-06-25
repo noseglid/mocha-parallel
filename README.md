@@ -14,13 +14,14 @@ A parallel runner for mocha. See usage example on how to use it
 
   Options:
 
-    -h, --help             output usage information
-    -V, --version          output the version number
-    -c, --cwd [cwd]        directory to execute tasks
-    -e, --env [env]        environment variables
-    -f, --format [format]  template for tasks
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -c, --cwd [cwd]            directory to execute tasks
+    -e, --env [env]            environment variables
+    -f, --format [format]      template for tasks
     -p, --parallel [parallel]  number of parallel tasks
-    -t, --tasks [tasks]    list of tasks
+    -t, --tasks [tasks]        list of tasks,
+    -r, --reporter [reporter]  the reporter to use. Supports: `dot`, `xunit`.
 
 ```
 
