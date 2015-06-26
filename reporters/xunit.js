@@ -22,9 +22,6 @@ var m = {
     Array.prototype.push.apply(m.passes, result.passes);
     Array.prototype.push.apply(m.pending, result.pending);
     Array.prototype.push.apply(m.failures, result.failures);
-
-    process.stderr.write(fmt('\r%d (out of %d) task(s) not yet started (%d success, %d failures, %d pending)',
-      parallelizer.queue.length, m.totalTasks, m.passes.length, m.failures.length, m.pending.length));
   },
 
   epilogue: function () {
