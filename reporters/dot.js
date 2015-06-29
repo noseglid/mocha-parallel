@@ -5,9 +5,10 @@ var parallelizer = require('../lib/parallelizer');
 require('colors');
 
 var resultColors = {
-  'passes': 'green',
-  'pending': 'blue',
-  'failures': 'red'
+  passes: 'green',
+  pending: 'blue',
+  failures: 'red',
+  time: 'grey',
 };
 
 function repeat(str, n) {
@@ -20,6 +21,8 @@ var m = {
   column: 0,
   maxColumns: 0,
   padding: '    ',
+  startTime: null,
+  totalTime: null,
 
   init: function (totalTasks, workerLength) {
     m.totalTasks = totalTasks;
@@ -29,6 +32,7 @@ var m = {
 
     process.stdout.write(fmt('\n%sRunning %d tests with %d parallel jobs\n', m.padding, totalTasks, workerLength));
     process.stdout.write(m.padding); // Initial padding. Padding for other rows are added in `printProgress`
+    m.startTime = process.hrtime();
   },
 
   progress: function (result) {
@@ -50,6 +54,7 @@ var m = {
   },
 
   epilogue: function (resultSet) {
+    m.totalTime = process.hrtime(m.startTime);
     process.stdout.write(repeat(' ', m.maxColumns - m.column));
     m.printProgress();
 
@@ -70,7 +75,8 @@ var m = {
       pending += result.stats.pending;
     });
 
-    process.stdout.write(m.padding + (passing + ' passing')[resultColors['passes']] + '\n');
+    process.stdout.write(m.padding + (passing + ' passing')[resultColors['passes']] +
+        (' (' + m.totalTime[0] + 's' + ')')[resultColors['time']] + '\n');
     process.stdout.write(m.padding + (pending + ' pending')[resultColors['pending']] + '\n');
     process.stdout.write(m.padding + (failures + ' failing')[resultColors['failures']] + '\n');
   },
