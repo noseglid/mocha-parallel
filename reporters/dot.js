@@ -55,6 +55,7 @@ var m = {
 
   epilogue: function (resultSet) {
     m.totalTime = process.hrtime(m.startTime);
+
     process.stdout.write(repeat(' ', m.maxColumns - m.column));
     m.printProgress();
 
@@ -76,7 +77,7 @@ var m = {
     });
 
     process.stdout.write(m.padding + (passing + ' passing')[resultColors['passes']] +
-        (' (' + m.totalTime[0] + 's' + ')')[resultColors['time']] + '\n');
+        (' (' + m.formatTime(m.totalTime[0]) + ')')[resultColors['time']] + '\n');
     process.stdout.write(m.padding + (pending + ' pending')[resultColors['pending']] + '\n');
     process.stdout.write(m.padding + (failures + ' failing')[resultColors['failures']] + '\n');
   },
@@ -91,6 +92,20 @@ var m = {
       m.totalTasks - parallelizer.queue.length,
       m.totalTasks,
       Math.floor(100 * (m.totalTasks - parallelizer.queue.length) / m.totalTasks)));
+  },
+
+  formatTime: function (duration) {
+    var hours = Math.floor(duration / 3600);
+    var minutes = Math.floor((duration / 60) % 60);
+    var seconds = duration % 60;
+    var output = seconds + 's';
+    if (duration >= 60) {
+      output = minutes + 'm ' + output;
+    }
+    if (duration >= 3600) {
+      output = hours + 'h ' + output;
+    }
+    return output;
   }
 
 };
