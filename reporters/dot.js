@@ -64,7 +64,7 @@ var m = {
         process.stdout.write('\n\n');
         process.stdout.write(m.padding + 'Failure: ' + failure.fullTitle + '\n');
         process.stdout.write(m.padding + failure.err.message.red + '\n');
-        if(typeof(failer.err.stack) !== 'undefined') {
+        if(typeof(failure.err.stack) !== 'undefined') {
           process.stdout.write(m.padding + failure.err.stack.replace(/\n/g, '\n' + m.padding, 1) + '\n');
         }
       });
